@@ -1,0 +1,9 @@
+[submodule "3rdparty/parser"]
+	path = 3rdparty/parser
+	url = https://github.com/yzhangcs/parser.git
+[submodule "3rdparty/mucgec"]
+	path = 3rdparty/mucgec
+	url = https://github.com/HillZhang1999/MuCGEC.git
+[submodule "3rdparty/imeasure"]
+	path = 3rdparty/imeasure
+	url = https://github.com/mfelice/imeasure.git

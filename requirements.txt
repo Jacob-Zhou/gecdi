@@ -1,0 +1,14 @@
+numpy>1.21.6
+torch>=2.0.0,!=1.12,<2.1.0
+transformers>=4.0.0
+hydra-core>=1.2
+nltk
+stanza
+omegaconf
+dill
+pathos
+ltp
+pypinyin
+Levenshtein
+OpenCC==1.1.2
+errant
