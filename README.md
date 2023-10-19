@@ -24,11 +24,9 @@ __Houquan Zhou__, Yumeng Liu, Zhenghua Li<sup title="Corresponding author" style
 ## TL;DR
 This repo contains the code for our EMNLP 2021 Findings paper: [Improving Seq2Seq Grammatical Error Correction via Decoding Interventions](tbd).
 
-We focuses on improving the Sequence-to-Sequence (Seq2Seq) method for grammatical error correction (GEC).
-While Seq2Seq is promising for GEC, it faces challenges with limited and noisy training data and lacks token correctness awareness during decoding.
 We introduce a decoding intervention framework that uses an external critic to assess and guide token generation.
 We evaluate two types of critics: a pre-trained language model and a incremental target-side grammatical error detector.
-Experiments on English and Chinese data show our approach surpasses many existing methods and competes with top-performing techniques.
+Experiments on English and Chinese data show our approach surpasses many existing methods and competes with SOTA models.
 
 ## Citation
 ```bib
