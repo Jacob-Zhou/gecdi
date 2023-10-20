@@ -17,12 +17,12 @@ __Houquan Zhou__, Yumeng Liu, Zhenghua Li<sup title="Corresponding author" style
 <div align="center">
 <img src="cover.jpg" width="350" height="350" alt="cover" align=center />
 <br>
-<sup align=center>Note: This cover image is created by <a href="https://openai.com/dall-e-3">DALL·E 3</sup>
+<sup align=center>Note: This cover image is created by <a href="https://openai.com/dall-e-3">DALL·E 3</a></sup>
 </div>
 </div>
 
 ## TL;DR
-This repo contains the code for our EMNLP 2021 Findings paper: [Improving Seq2Seq Grammatical Error Correction via Decoding Interventions](tbd).
+This repo contains the code for our EMNLP 2023 Findings paper: [Improving Seq2Seq Grammatical Error Correction via Decoding Interventions](tbd).
 
 We introduce a decoding intervention framework that uses *critics* to assess and guide token generation.
 We evaluate two types of critics: **a pre-trained language model** and **a incremental target-side grammatical error detector**.
@@ -83,35 +83,100 @@ Each sentence pair is separated by a blank line.
 See [`data/toy.train`](data/toy.train) for examples.
 
 
+## Download Trained Models
+The trained models are avaliable in HuggingFace model hub.
+You can download them by running:
+```sh
+# If you have not installed git-lfs, please install it first
+# The installation guide can be found here: https://git-lfs.github.com/
+# Most of the installation guide requires root permission.
+# However, you can install it locally using conda:
+# https://anaconda.org/anaconda/git-lfs
+
+# Create directory for storing the trained models
+mkdir -p models
+cd models
+
+# Download the trained models
+# First, clone the small files
+GIT_LFS_SKIP_SMUDGE=1 git clone https://huggingface.co/HQZhou/bart-large-gec
+# Then use git-lfs to download the large files
+cd bart-large-gec
+git lfs pull
+
+# Return to the models directory
+cd -
+
+# The download process is the same for the GED model
+GIT_LFS_SKIP_SMUDGE=1 git clone https://huggingface.co/HQZhou/bart-large-ged
+cd bart-large-ged
+git lfs pull
+```
+
+
+
 ## Run
 
 English experiments:
 ```sh
 # Baseline (vanilla decoding)
-bash pred.sh devices=0 dataset=bea19.dev
+bash pred.sh  \
+    devices=0  \
+    gec_path=models/bart-large-gec/model  \
+    dataset=bea19.dev
 
 # w/ LM-critic
-bash pred.sh devices=0 lm_alpha=0.8  lm_beta=10 dataset=bea19.dev
+bash pred.sh  \
+    devices=0  \
+    gec_path=models/bart-large-gec/model  \
+    lm_alpha=0.8 lm_beta=10  \
+    dataset=bea19.dev
 
 # w/ GED-critic
-bash pred.sh devices=0 ged_alpha=0.8 ged_beta=1 dataset=bea19.dev
+bash pred.sh  \
+    devices=0  \
+    gec_path=models/bart-large-gec/model  \
+    ged_path=models/bart-large-ged/model  \
+    ged_alpha=0.8 ged_beta=1  \
+    batch=500  \
+    dataset=bea19.dev
 
 # w/ both LM-critic and GED-critic
-bash pred.sh devices=0 lm_alpha=0.8 lm_beta=10 ged_alpha=0.8 ged_beta=1 dataset=bea19.dev
+bash pred.sh  \
+    devices=0  \
+    gec_path=models/bart-large-gec/model  \
+    ged_path=models/bart-large-ged/model  \
+    lm_alpha=0.8 lm_beta=10  \
+    ged_alpha=0.8 ged_beta=1  \
+    batch=250  \
+    dataset=bea19.dev
 ```
 
 Chinese experiments:
 ```sh
 # Baseline (vanilla decoding)
-bash pred.sh devices=0 dataset=mucgec.dev
+bash pred.sh  \
+    devices=0  \
+    dataset=mucgec.dev
 
 # w/ LM-critic
-bash pred.sh devices=0 lm_alpha=0.3  lm_beta=0.1 dataset=mucgec.dev
+bash pred.sh  \
+    devices=0  \
+    lm_alpha=0.3  \
+    lm_beta=0.1  \
+    dataset=mucgec.dev
 
 # w/ GED-critic
-bash pred.sh devices=0 ged_alpha=0.6 ged_beta=10 dataset=mucgec.dev
+bash pred.sh  \
+    devices=0  \
+    ged_alpha=0.6 ged_beta=10  \
+    dataset=mucgec.dev
 
 # w/ both LM-critic and GED-critic
-bash pred.sh devices=0 lm_alpha=0.3 lm_beta=0.1 ged_alpha=0.6 ged_beta=10 dataset=mucgec.dev
+bash pred.sh  \
+    devices=0  \
+    lm_alpha=0.3 lm_beta=0.1  \
+    ged_alpha=0.6 ged_beta=10  \
+    dataset=mucgec.dev
 ```
 
