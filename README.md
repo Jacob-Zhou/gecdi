@@ -15,7 +15,7 @@ __Houquan Zhou__, Yumeng Liu, Zhenghua Li<sup title="Corresponding author" style
 
 <!-- A image -->
 <div align="center">
-<img src="cover.jpg" width="350" height="350" alt="cover" align=center />
+<img src="assets/cover-2.jpg" width="350" height="350" alt="cover" align=center />
 <br>
 <sup align=center>Note: This cover image is created by <a href="https://openai.com/dall-e-3">DALL·E 3</a></sup>
 </div>
