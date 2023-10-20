@@ -180,3 +180,23 @@ bash pred.sh  \
     dataset=mucgec.dev
 ```
 
+## Recommended Hyperparameters
+We search the coefficient $\alpha$ and $\beta$ on the development set.
+
+The optimal coefficients are varied across different datasets.
+
+Hyperparameters for LM-critic:
+| Dataset | $\alpha$ | $\beta$ |
+|:-------:|:--------:|:-------:|
+| CoNLL-14 | 0.8 | 10.0 |
+| BEA-19 | 0.8 | 10.0 |
+| GMEG-Wiki | 1.0 | 10.0 |
+| MuCGEC | 0.3 | 0.1 |
+
+Hyperparameters for GED-critic:
+| Dataset | $\alpha$ | $\beta$ |
+|:-------:|:--------:|:-------:|
+| CoNLL-14 | 0.8 | 1.0 |
+| BEA-19 | 0.8 | 1.0 |
+| GMEG-Wiki | 0.9 | 1.0 |
+| MuCGEC | 0.6 | 10.0 |

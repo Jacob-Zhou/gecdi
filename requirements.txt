@@ -10,5 +10,5 @@ pathos
 ltp
 pypinyin
 Levenshtein
-OpenCC==1.1.2
+OpenCC<=1.1.2
 errant
