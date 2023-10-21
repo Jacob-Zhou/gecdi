@@ -1,11 +1,3 @@
-<!-- git submodule add https://github.com/yzhangcs/parser.git 3rdparty/parser
-git submodule add https://github.com/HillZhang1999/MuCGEC.git 3rdparty/mucgec
-git submodule add https://github.com/mfelice/imeasure.git 3rdparty/imeasure
-
-git submodule init
-git submodule update -->
-
-
 <div align="center">
 
 # Improving Seq2Seq Grammatical Error Correction via Decoding Interventions
@@ -25,7 +17,7 @@ __Houquan Zhou__, Yumeng Liu, Zhenghua Li<sup title="Corresponding author" style
 This repo contains the code for our EMNLP 2023 Findings paper: [Improving Seq2Seq Grammatical Error Correction via Decoding Interventions](tbd).
 
 We introduce a decoding intervention framework that uses *critics* to assess and guide token generation.
-We evaluate two types of critics: **a pre-trained language model** and **a incremental target-side grammatical error detector**.
+We evaluate two types of critics: **a pre-trained language model** and **an incremental target-side grammatical error detector**.
 Experiments on English and Chinese data show our approach surpasses many existing methods and competes with SOTA models.
 
 ## Citation
@@ -51,9 +43,10 @@ Experiments on English and Chinese data show our approach surpasses many existin
 Clone this repo recursively:
 ```sh
 git clone https://github.com/Jacob-Zhou/gecdi.git --recursive
+
 # The newest version of parser is not compatible with the current code, 
 # so we need to checkout to a previous version
-cd 3rdparty/parser/ && git checkout 6dc927b
+cd 3rdparty/parser/ && git checkout 6dc927b && cd -
 ```
 
 Then you can use following commands to create an environment and install the dependencies:
