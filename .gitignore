@@ -1,5 +1,6 @@
 # data files
 data
+models
 
 # bash scripts
 *.sh
