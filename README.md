@@ -14,7 +14,7 @@ __Houquan Zhou__, Yumeng Liu, Zhenghua Li<sup title="Corresponding author" style
 </div>
 
 ## TL;DR
-This repo contains the code for our EMNLP 2023 Findings paper: [Improving Seq2Seq Grammatical Error Correction via Decoding Interventions](tbd).
+This repo contains the code for our EMNLP 2023 Findings paper: [Improving Seq2Seq Grammatical Error Correction via Decoding Interventions](https://arxiv.org/abs/2310.14534).
 
 We introduce a decoding intervention framework that uses *critics* to assess and guide token generation.
 We evaluate two types of critics: **a pre-trained language model** and **an incremental target-side grammatical error detector**.
