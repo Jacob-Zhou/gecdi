@@ -22,19 +22,26 @@ Experiments on English and Chinese data show our approach surpasses many existin
 
 ## Citation
 ```bib
-@inproceedings{zhou-et-al-2023-improving,
-  title     = {Improving Seq2Seq Grammatical Error Correction via Decoding Interventions},
-  author    = {Zhou, Houquan  and
-               Liu, Yumeng  and
-               Li, Zhenghua  and
-               Zhang, Min  and
-               Zhang, Bo  and
-               Li, Chen  and
-               Zhang, Ji  and
-               Huang, Fei},
-  booktitle = {Findings of EMNLP},
-  year      = {2023},
-  address   = {Singapore}
+@inproceedings{zhou-etal-2023-improving-seq2seq,
+    title = "Improving {S}eq2{S}eq Grammatical Error Correction via Decoding Interventions",
+    author = "Zhou, Houquan  and
+      Liu, Yumeng  and
+      Li, Zhenghua  and
+      Zhang, Min  and
+      Zhang, Bo  and
+      Li, Chen  and
+      Zhang, Ji  and
+      Huang, Fei",
+    editor = "Bouamor, Houda  and
+      Pino, Juan  and
+      Bali, Kalika",
+    booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2023",
+    month = dec,
+    year = "2023",
+    address = "Singapore",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.findings-emnlp.495",
+    pages = "7393--7405",
 }
 ```
 
