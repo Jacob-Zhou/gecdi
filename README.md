@@ -53,7 +53,7 @@ git clone https://github.com/Jacob-Zhou/gecdi.git --recursive
 
 # The newest version of parser is not compatible with the current code, 
 # so we need to checkout to a previous version
-cd 3rdparty/parser/ && git checkout 6dc927b && cd -
+cd gecdi/3rdparty/parser/ && git checkout 6dc927b && cd -
 ```
 
 Then you can use following commands to create an environment and install the dependencies:
