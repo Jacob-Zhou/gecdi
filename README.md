@@ -46,7 +46,7 @@ git clone https://github.com/Jacob-Zhou/gecdi.git --recursive
 
 # The newest version of parser is not compatible with the current code, 
 # so we need to checkout to a previous version
-cd 3rdparty/parser/ && git checkout 6dc927b && cd -
+cd gecdi/3rdparty/parser/ && git checkout 6dc927b && cd -
 ```
 
 Then you can use following commands to create an environment and install the dependencies:
@@ -193,3 +193,7 @@ Hyperparameters for GED-critic:
 | BEA-19 | 0.8 | 1.0 |
 | GMEG-Wiki | 0.9 | 1.0 |
 | MuCGEC | 0.6 | 10.0 |
+
+## Typo
+
+- Appendix B.2 (STAGE 3): We further fine-tune the model on the W&I + LOCNESS **test** set only. $\rightarrow$ We further fine-tune the model on the W&I + LOCNESS **training** set only. (We sincerely apologize for this typo and thank @GMago123 for pointing it out in the [issue#4](https://github.com/Jacob-Zhou/gecdi/issues/4))
