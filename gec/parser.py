@@ -732,6 +732,7 @@ class Seq2seqIntervenedParser(Parser):
                 buckets: int = 8,
                 workers: int = 0,
                 cache: bool = False,
+                verbose: bool = True,
                 **kwargs):
         r"""
         Args:

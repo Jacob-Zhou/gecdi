@@ -20,7 +20,7 @@ set -o pipefail
         eval "$arg"
     done
 
-    echo "config:    ${config:=configs/bart.ini}"
+    echo "config:    ${config:=configs/bart.zh.ini}"
     echo "path:      ${path:=$(mktemp -d)}"
     echo "suffix:    ${suffix:=}"
     echo "gec_path:  ${gec_path:=models/model.zh.seed-1}"

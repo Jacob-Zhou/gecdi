@@ -111,9 +111,20 @@ cd -
 GIT_LFS_SKIP_SMUDGE=1 git clone https://huggingface.co/HQZhou/bart-large-ged
 cd bart-large-ged
 git lfs pull
+
+# The download process is the same for the Chinese models
+# Just change the GEC url to https://huggingface.co/HQZhou/bart-large-chinese-gec
+# and the GED url to https://huggingface.co/HQZhou/bart-large-chinese-ged
 ```
 
+The models can also download by using the `huggingface-cli`:
+```sh
 
+# First make sure that you have installed `huggingface_hub` package
+# You can install it following the guide here: https://huggingface.co/docs/huggingface_hub/installation
+huggingface-cli download HQZhou/bart-large-gec --local-dir-use-symlinks False --local-dir models/bart-large-gec
+huggingface-cli download HQZhou/bart-large-ged --local-dir-use-symlinks False --local-dir models/bart-large-ged
+```
 
 ## Run
 
