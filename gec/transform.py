@@ -282,6 +282,7 @@ class TreeSentence(Sentence):
 
     def __init__(self, transform: Text, lines: List[str], index: Optional[int] = None) -> TextSentence:
         super().__init__(transform, index)
+        self.repr_fn = None
         self.cands = [self.get_tree(line) for line in lines[1:]]
         src_tree, tgt_tree = self.get_tree(lines[0]), self.cands[0]
         if len(tgt_tree.leaves()) == 0:
@@ -356,7 +357,10 @@ class TreeSentence(Sentence):
             return nltk.Tree('TOP', [nltk.Tree('S', [nltk.Tree('_', [word]) for word in text.split()])])
 
     def __repr__(self):
-        cands = self.values[1] if isinstance(self.values[1], list) else [self.values[1]]
-        lines = ['S\t' + self.values[0]]
-        lines.extend(['T\t' + i for i in cands])
-        return '\n'.join(lines) + '\n'
+        if self.repr_fn is None or not callable(self.repr_fn):
+            cands = self.values[1] if isinstance(self.values[1], list) else [self.values[1]]
+            lines = ['S\t' + self.values[0]]
+            lines.extend(['T\t' + i for i in cands])
+            return '\n'.join(lines) + '\n'
+        else:
+            return self.repr_fn(self)

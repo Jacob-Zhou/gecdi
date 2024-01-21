@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from functools import partial
+import json
 import os
 from datetime import datetime, timedelta
 import shutil
@@ -534,15 +536,9 @@ class Seq2SeqDetector(Seq2SeqParser):
         loss = self.model.loss(x, tgt, src_error, tgt_error, src_mask,
                                tgt_mask)
 
-        def error_label_factorize(errors):
-            return sum(
-                [[(i, i + 1, e) for e in eb.split("::")]
-                 for i, eb in enumerate(errors) if eb not in {'CORRECT', NUL}],
-                [])
-
-        ged_golds = [error_label_factorize(e) for e in tgt_error_raw]
+        ged_golds = [self.error_label_factorize(e) for e in tgt_error_raw]
         ged_preds = [
-            error_label_factorize(
+            self.error_label_factorize(
                 [self.TGT_ERROR.vocab[i] for i in e if i >= 0])
             for e in self.model.decode(x, tgt, src_mask, tgt_mask).tolist()
         ]
@@ -557,16 +553,38 @@ class Seq2SeqDetector(Seq2SeqParser):
             self.args.pad_index)
         x = self.model(src)
 
-        tgt_charts = self.model.decode_syn(x, tgt, src_mask, tgt_mask)
-        tgt_trees = [s.tgt_tree for s in batch.sentences]
+        ged_preds = [
+            self.error_label_factorize(
+                [self.TGT_ERROR.vocab[i] for i in e if i >= 0])
+            for e in self.model.decode(x, tgt, src_mask, tgt_mask).tolist()
+        ]
 
-        batch.tgt = [[
-            AttachJuxtaposeTree.build(tgt_tree, [(i, j, self.NEW.vocab[label])
-                                                 for i, j, label in tgt_chart],
-                                      {UNK, NUL}).pformat(100000000000)
-        ] for tgt_tree, tgt_chart in zip(tgt_trees, tgt_charts)]
+
+        def json_repr(sentence, tgt_subword, pred):
+            return json.dumps({
+                "src_text": sentence.values[0],
+                "tgt_text": sentence.values[1],
+                "tgt_subword": tgt_subword,
+                "error": pred
+            }, ensure_ascii=False)
+
+        for sentence, tgt_subword, pred in zip(batch.sentences, batch.tgt,
+                                               ged_preds):
+            tgt_subword = self.TGT.tokenize.convert_ids_to_tokens(tgt_subword, skip_special_tokens=True)
+            sentence.repr_fn = partial(json_repr, tgt_subword=tgt_subword,
+                                       pred=pred)
+
+        # # some thing to convert ged_preds to json
+        # import pdb
+        # pdb.set_trace()
 
         return batch
+
+    def error_label_factorize(self, errors):
+        return sum(
+            [[(i, i + 1, e) for e in eb.split("::")]
+                for i, eb in enumerate(errors) if eb not in {'CORRECT', NUL}],
+            [])
 
     @classmethod
     def build(cls, path, min_freq=2, fix_len=20, **kwargs):
