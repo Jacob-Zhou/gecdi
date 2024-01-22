@@ -191,6 +191,30 @@ bash pred.sh  \
     dataset=mucgec.dev
 ```
 
+Run target-side GED only:
+```sh
+bash pred_ged.sh  \
+    devices=0  \
+    path=models/bart-large-ged/model  \
+    data=<path to the parallel data to be detected>  \
+    pred=<path to the output file>
+
+# the output file is in the format of jsonl as follows:
+# {
+#     "src_text": "I implicated my class from winning the champion .",
+#     "tgt_text": "I implicated my class in winning the champion .",
+#     "tgt_subword": ["ĠI", "Ġimplicated", "Ġmy", "Ġclass", "Ġin", "Ġwinning", "Ġthe", "Ġchampion", "Ġ."],
+#     "error": [[1, 2, "SUB"], [4, 5, "SUB"]]
+# }
+
+# the error field is a list of error spans, each span is represented as a list of three elements:
+# [start of subword span, end of subword span, error type]
+# error type can be one of the following:
+# `RED`: redundant
+# `SUB`: substitution
+# `MISS-L`: there are missing tokens on the left side of the span
+```
+
 ## Recommended Hyperparameters
 We search the coefficient $\alpha$ and $\beta$ on the development set.
 
