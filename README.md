@@ -199,7 +199,14 @@ bash pred_ged.sh  \
     data=<path to the parallel data to be detected>  \
     pred=<path to the output file>
 
-# the output file is in the format of jsonl as follows:
+# the input file should be in the format of:
+# S   [src 0]
+# T   [tgt 0]
+
+# S   [src 1]
+# T   [tgt 1]
+
+# the output file will be in the format of jsonl as follows:
 # {
 #     "src_text": "I implicated my class from winning the champion .",
 #     "tgt_text": "I implicated my class in winning the champion .",
